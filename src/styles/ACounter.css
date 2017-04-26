@@ -1,0 +1,19 @@
+.total-days{
+    font-size: 2em;
+    /*border: 1px solid red;*/
+    margin: 10px auto;
+    margin-bottom: 45px;
+    text-align:center;
+}
+
+.powder-days{
+    font-size: 1.2em;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.backcountry-days{
+    font-size: 1.2em;
+    margin: 0 auto;
+    text-align: center;
+}

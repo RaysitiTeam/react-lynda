@@ -1,0 +1,36 @@
+.loader-div{
+    width: 100%;
+ 
+ text-align: center;   
+}
+
+.loader-box{    
+    color:#fff;
+    border-radius: 15px;
+    background: rgba(34,34,34,0.8);
+    text-align: center;
+    margin: 0 auto;
+    border: 1px solid #4C4C4C;
+    width: 150px;
+    height: auto;
+}
+
+.loader-active{
+    animation: Opacity-fade-in .4s linear;
+    opacity: 1;
+}
+
+.loader-inactive{
+    animation: Opacity-fade-out .4s linear;
+    opacity: 0;
+}
+
+@keyframes Opacity-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes Opacity-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

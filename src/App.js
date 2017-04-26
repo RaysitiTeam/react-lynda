@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
 import Axios from 'axios';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
-  state = {
+  state={
     title:'',
     message:''
   };
@@ -24,7 +25,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React {this.state.title}</h2>
-          <button onClick = {this.getJson}>click Me !</button>
+          <button className="btn btn-primary simple-button" onClick={this.getJson}>click Me !</button>
         </div>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.

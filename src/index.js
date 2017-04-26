@@ -1,6 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.css';
+import ACounter from './ACounter';
+import Loader from './Loader';
+import './styles/index.css';
 
-ReactDOM.render(<App />,document.getElementById('root')); //ReactDOM
+
+const MainApp = (props)=>{
+    return(
+        <div>
+            <App/>
+            <ACounter total={50}
+                      powder={20}  
+                      backCountry={10}
+                      goal={100}
+            />            
+        </div>
+    );//end:return
+};//end:MainApp
+
+ReactDOM.render(<MainApp />,document.getElementById('root')); //ReactDOM
