@@ -5,7 +5,7 @@
 - [Importing React Components](#importing-react-components)
 - [Creating a Simple Custom Loader using React](#creating-a-simple-custom-loader-using-react)
 - [React Basic Dos and Donts](#react-basic-dos-and-donts)
-
+- [Three ways of Creating React Components](#three-ways-of-creating-react-components)
 
 
  # Installing Web Pack
@@ -191,3 +191,49 @@ const Button = (props)=>{
 <Button stringValue = "This is a string" numberInput = {this.inputValue} />
 ```
 
+# Three ways of Creating React Components
+
+There are three ways of Creating React Components so far (based on all the examples that I have seen)...
+
+## 1. Primitive React Component (might be deprecated)...
+```js
+export const PrimitiveComponent = React.createClass({
+    methodOne(param1){}, methodTwo(param1,param2){}, methodThree(param3){},
+    render(){
+        return(
+            <div>This is a primitive Component </div>
+        );//end:return
+    }//end:render
+});//end:createClass
+```
+
+## 2. Function Component (for stateless Components)...
+
+This is supported in the EcmaScript 6 / 2015 format..
+
+```js
+const FunctionalComponent = (props) =>{
+    return(
+        <div>This is a functional Component </div>
+    );//end:return
+}//end:functionComponent
+
+export default FunctionComponent
+```
+
+## 3. Class Component (for statehandling and setState and prevState features)
+
+This is also supported in the Ecmascript 6 / 2015 format...
+
+```js
+class ClassComponent extends React.Component{
+    state = {simpleState:"HelloWorld"}
+    render(){
+        return(
+            <div>This is a Class component</div>
+        );//end:return
+    }//end:render
+}//end-class:ClassComponent
+
+export default ClassComponent
+```

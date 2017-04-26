@@ -10,6 +10,14 @@ class ACounter extends Component {
         title: 'Pramod',
         setLoader: false
     };
+
+    decimalToPercent = (decimal) =>{
+        return (Math.floor(decimal*100) + '%');
+    };//end:decimalToPercent
+
+    calcGoalProgress = (total, goal)=>{
+        return this.decimalToPercent(total/goal);
+    };//end:calcGoalProgress
     render() {
         const { setLoader } = this.state;
         return (
@@ -19,15 +27,21 @@ class ACounter extends Component {
                 <div className="container">
                     <div className="col-lg-12 ski-day-counter">
                         <div className="total-days">
+                            <span>{this.props.total}</span>
                             <span> 5 Days </span>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-6 powder-days">
+                            <span> {this.props.powder} </span>
                             <span> 2 Days </span>
                         </div>
                         <div className="col-lg-6 backcountry-days">
+                            <span> {this.props.backCountry}</span>
                             <span> 1 Hiking Day</span>
+                        </div>
+                        <div className="col-lg-12 goal-div">
+                            <span>Goal: {this.calcGoalProgress(this.props.total, this.props.goal)}</span>
                         </div>
                     </div>
                 </div>
