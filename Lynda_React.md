@@ -1,11 +1,15 @@
 # Lynda React
 
+ ## Useful Links
+- [Schema Store for Web Development](http://schemastore.org/json/)
+- [React Icons Website](https://gorangajic.github.io/react-icons/fa.html)
  ## Table of Contents
 - [Intalling Web Pack](#installing-web-pack)
 - [Importing React Components](#importing-react-components)
 - [Creating a Simple Custom Loader using React](#creating-a-simple-custom-loader-using-react)
 - [React Basic Dos and Donts](#react-basic-dos-and-donts)
 - [Three ways of Creating React Components](#three-ways-of-creating-react-components)
+- [Package Json for the project](#package-json-for-the-project)
 
 
  # Installing Web Pack
@@ -236,4 +240,36 @@ class ClassComponent extends React.Component{
 }//end-class:ClassComponent
 
 export default ClassComponent
+```
+
+
+# Package Json for the project
+
+The following is the `package.json` for the project: 
+
+```js
+{
+  "name": "react-basics",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.1",
+    "bootstrap": "^3.3.7",
+    "classnames": "^2.2.5",
+    "jquery": "^3.2.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-icons": "^2.2.3"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+
 ```

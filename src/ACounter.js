@@ -4,6 +4,11 @@ import $ from 'jquery';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './styles/ACounter.css';
 import Loader from './Loader';
+//React-icons
+import Terrain from 'react-icons/lib/md/terrain';
+import Snowflake from 'react-icons/lib/ti/weather-snow';
+import Calendar from 'react-icons/lib/fa/calendar';
+
 
 class ACounter extends Component {
     state = {
@@ -28,16 +33,19 @@ class ACounter extends Component {
                     <div className="col-lg-12 ski-day-counter">
                         <div className="total-days">
                             <span>{this.props.total}</span>
+                            <Calendar/>
                             <span> 5 Days </span>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-6 powder-days">
                             <span> {this.props.powder} </span>
+                            <Snowflake/>
                             <span> 2 Days </span>
                         </div>
                         <div className="col-lg-6 backcountry-days">
                             <span> {this.props.backCountry}</span>
+                            <Terrain/>
                             <span> 1 Hiking Day</span>
                         </div>
                         <div className="col-lg-12 goal-div">

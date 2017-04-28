@@ -1,0 +1,92 @@
+[
+    {
+        "resort": "Motrico",
+        "date": "10/10/2016",
+        "powder": true,
+        "backcountry": false
+    },
+    {
+        "resort": "Corgo",
+        "date": "19/2/2017",
+        "powder": true,
+        "backcountry": false
+    },
+    {
+        "resort": "Chengfeng",
+        "date": "26/4/2017",
+        "powder": true,
+        "backcountry": false
+    },
+    {
+        "resort": "Newton",
+        "date": "20/11/2016",
+        "powder": true,
+        "backcountry": false
+    },
+    {
+        "resort": "Kudowa-Zdrój",
+        "date": "31/1/2017",
+        "powder": true,
+        "backcountry": true
+    },
+    {
+        "resort": "Bergen",
+        "date": "25/3/2017",
+        "powder": true,
+        "backcountry": false
+    },
+    {
+        "resort": "São José do Rio Pardo",
+        "date": "2/12/2016",
+        "powder": false,
+        "backcountry": true
+    },
+    {
+        "resort": "Phu Loc",
+        "date": "20/6/2016",
+        "powder": false,
+        "backcountry": true
+    },
+    {
+        "resort": "Bélabo",
+        "date": "3/2/2017",
+        "powder": false,
+        "backcountry": true
+    },
+    {
+        "resort": "Lisewo",
+        "date": "7/5/2016",
+        "powder": true,
+        "backcountry": false
+    },
+    {
+        "resort": "Chrzanów",
+        "date": "21/12/2016",
+        "powder": true,
+        "backcountry": true
+    },
+    {
+        "resort": "Jiangcun",
+        "date": "15/11/2016",
+        "powder": true,
+        "backcountry": true
+    },
+    {
+        "resort": "Lopar",
+        "date": "4/1/2017",
+        "powder": true,
+        "backcountry": false
+    },
+    {
+        "resort": "Topolná",
+        "date": "18/6/2016",
+        "powder": false,
+        "backcountry": false
+    },
+    {
+        "resort": "Likhoy",
+        "date": "17/11/2016",
+        "powder": false,
+        "backcountry": false
+    }
+]
