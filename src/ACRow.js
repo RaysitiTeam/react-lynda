@@ -3,13 +3,14 @@ import React from 'react';
 import Terrain from 'react-icons/lib/md/terrain';
 import Snowflake from 'react-icons/lib/ti/weather-snow';
 
-const ACRow = (props) =>{
+const ACRow = ({date,resort,powder,backcountry}) =>{
+        let currDate = new Date(date);
     return(
     <tr>
-        <td>{props.date}</td>
-        <td>{props.resort}</td>
-        <td>{(props.powder)?<Snowflake/>:null}</td>
-        <td>{(props.backcountry)?<Terrain/>:null}</td>
+        <td>{currDate.getDate() + `/` + currDate.getMonth() + `/` + currDate.getFullYear()}</td>
+        <td>{resort}</td>
+        <td>{(powder)?<Snowflake/>:null}</td>
+        <td>{(backcountry)?<Terrain/>:null}</td>
     </tr>
     );
 };//end:ACRow
