@@ -11,6 +11,7 @@
 
 # vscode, only include launch.json
 .vscode/chrome
+.vscode/symbols.json
 
 # misc
 

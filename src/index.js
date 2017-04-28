@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import ACounter from './ACounter';
 import ACList from './ACList';
-import Loader from './Loader';
+import ACRow from './ACRow';
 import './styles/index.css';
 
 
@@ -12,12 +12,11 @@ const MainApp = (props)=>{
         <div>
             <App/>
             <ACounter total={50}
-                      powder={20}  
+                      powder={20}
                       backCountry={10}
                       goal={100}
             />
-            <ACList/>
-                        
+            <ACList/>            
         </div>
     );//end:return
 };//end:MainApp
