@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Axios from 'axios';
 import $ from 'jquery';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -11,6 +12,7 @@ import Calendar from 'react-icons/lib/fa/calendar';
 
 
 class ACounter extends Component {
+
     state = {
         title: 'Pramod',
         setLoader: false
@@ -57,5 +59,21 @@ class ACounter extends Component {
         );
     }//end:render
 }//end-class:ACounter
+
+ACounter.defaultProps = {    
+            total:50,
+            powder:50,
+            backCountry:15,
+            goal:100
+    
+};
+
+//Type definition - React's style
+ACounter.propTypes = {
+    total:PropTypes.number,
+    powder:PropTypes.number,
+    backCountry:PropTypes.number,
+    goal:PropTypes.number
+};
 
 export default ACounter;

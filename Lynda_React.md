@@ -3,6 +3,7 @@
  ## Useful Links
 - [Schema Store for Web Development](http://schemastore.org/json/)
 - [React Icons Website](https://gorangajic.github.io/react-icons/fa.html)
+- [React Proptypes In Typeschecking](#https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
  ## Table of Contents
 - [Intalling Web Pack](#installing-web-pack)
 - [Importing React Components](#importing-react-components)
@@ -10,6 +11,8 @@
 - [React Basic Dos and Donts](#react-basic-dos-and-donts)
 - [Three ways of Creating React Components](#three-ways-of-creating-react-components)
 - [Package Json for the project](#package-json-for-the-project)
+- [Using Default Props in React](#using-default-props-in-react)
+- [Using Proptypes A feature similar to TypeScript](#using-proptypes-a-feature-similar-to-type-script)
 
 
  # Installing Web Pack
@@ -272,4 +275,115 @@ The following is the `package.json` for the project:
   }
 }
 
+```
+
+# Using Default Props in React
+
+We can assign default property values to React Components. However, `this is achieved in different ways` to different components.
+
+## Using React.createClass component
+
+In this type of component, we can assign the defaultValues using a simple `static` method.
+
+>NOTE: If we use this in any other component style, React will throw an error.
+- `warning.js:36 Warning: getDefaultProps is only used on classic React.createClass definitions. Use a static property named 'defaultProps' instead.`
+
+```js
+//Giving defaullt values to Components
+    static getDefaultProps = () =>{
+        return{
+            total:50,
+            powder:50,
+            backCountry:15,
+            goal:100
+        };
+    };//end:getDefaultProps
+```
+
+## Using React Ecmascript extends Class Component style
+
+In this we need to create an `instance of the class` component, then assign a value:
+
+```js
+ACounter.defaultProps = {    
+            total:50,
+            powder:50,
+            backCountry:15,
+            goal:100
+    
+};//end:defaultProps
+```
+
+## Using Function components style
+
+In this case, we can bank on the Ecmascript 6 standard of assigning default values to functions.
+
+```js
+const ACRow = ({date='01/01/2017',resort=10,powder=10,backcountry=10}) =>{
+        let currDate = new Date(date);
+    return(
+    <tr>
+        <td>{currDate.getDate() + `/` + currDate.getMonth() + `/` + currDate.getFullYear()}</td>
+        <td>{resort}</td>
+        <td>{(powder)?<Snowflake/>:null}</td>
+        <td>{(backcountry)?<Terrain/>:null}</td>
+    </tr>
+    );
+};//end:ACRow
+```
+
+# Using Proptypes A feature similar to TypeScript
+
+Another enhancement is, Proptypes: Proptypes allow us to supply a `Property Type` to all our properties, so that it will validate to make sure we are supplying the right type of values.
+
+[React Proptypes Documentation link](#https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
+
+## Using in Class Components
+
+In `React.createClass({....})` style, we can assign the Property definitions as follows:
+
+>NOTE: As of React version 15.5 and above, proptypes are a separate package of their own:
+- npm install --save prop-types
+
+```js
+import Proptypes from 'prop-types';
+...
+.
+...
+.
+.
+.
+export const ACounter = createClass({
+    propTypes:{
+        total:PropTypes.number.isRequired,
+        powder:PropTypes.number,
+        backCountry:PropTypes.number,
+        goal:PropTypes.number
+    },
+    getDefaultProps(){
+        ...
+    }
+})
+```
+
+## Using in ES6 style extends Class component
+
+```js
+import Proptypes from 'prop-types';
+...
+.
+.
+.
+.
+.
+.
+.
+.
+//Type definition - React's style
+ACounter.propTypes = {
+    total:PropTypes.number.isRequired,
+    powder:PropTypes.number,
+    backCountry:PropTypes.number,
+    goal:PropTypes.number
+};
 ```
