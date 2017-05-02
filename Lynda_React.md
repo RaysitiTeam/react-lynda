@@ -20,6 +20,11 @@
 - [React Forms](#react-forms)
 - [Using Refs with Forms](#using-refs-with-forms)
 - [Understanding the Component Lifecycle](#understanding-the-component-lifecycle)
+## React Inline Styling using Radium (Pluralsight)
+- [Introduction to radium](#introduction-to-radium)
+- [Radium Styling Video on Pluralsight](https://app.pluralsight.com/player?course=react-styling-components&author=jake-trent&name=react-styling-components-m3&clip=2&mode=live)
+## Using Webpack for CSS Styling
+- [Introduction to Webpack Asset building](#introduction-to-webpack-asset-building)
 
 
  # Installing Web Pack
@@ -758,4 +763,93 @@ Each component also provides some other APIs:
 - state
 
 
+# Introduction to radium
 
+Radium is a third party library developed by `Formidabble Labs` which is nothing but `inlineStyles++`
+
+`radium = inlineStyles + mediaQueries + pseudoSelectors + keyframes`
+
+Radium provides a React component that wraps all your Radium styles components. This component even takes care of interesting things like tracking hover states..etc.,
+
+```js
+{
+  "name": "react-basics",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.1",
+    "bootstrap": "^3.3.7",
+    "classnames": "^2.2.5",
+    "jquery": "^3.2.1",
+    "prop-types": "^15.5.8",
+    "radium": "^0.18.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-icons": "^2.2.3",
+    "react-router": "^3.0.0"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
+
+##Using Radium as a Style Property
+
+Radium is an inlinestyling library which supports React components. We can use Radium in two different places
+
+1. Using for existing Components, with the `<Style rules= {styleVariable}/>`
+2. Wrapping an existing Component with Radium and exporting it - `export default Radium(Frame)` 
+
+##Pros of using Radium
+
+- `Global Namespace` -  Global styles are not the defaults.
+- `Dependencies` - It checks out on the dependencies section.
+- `Dead Code Elimination` - Is possible with Radium.
+- `Minification` - Since it is pure Javascript, it can be easily minified.
+- `Sharing Constants` - you can use `import` keyword to import another style within your style object.
+- `Non-deterministic Resolution` - You can define using media-queries.
+- `Media Queries support` - It can support Media Queries.
+- `Pseudo Selectors` - It can support pseudo selectors.
+- `Keyframe Animations` - It can even support Keyframe Animations
+
+# Introduction to Webpack Asset building
+
+The details, of how the webpack would work, are stored in a configuration JS file called - `webpack.config.js`
+
+- `webpack.config.dev.js` - The `.dev` suffix denotes this project only has configuration that allows to run the project locally, not production
+- `webpack.config.js` - This will support production ready modules.
+
+>webpack.config.js
+```js
+var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+    //These are the places, where the execution of your program begins, from these starting point, modules are imported defining dependencies
+    entry:['./filenames.js'], // the entry attribute will contain one or more entry points to your app
+    output:{  // When bundles are produced, they are put into place specified by this attribute
+        path:path.join(__dirname,'/dist'), //using the PATH library and the nodeJS __dirname
+        filename:'my-bundle.js', //name of the specific file, or we can use wildcards like - *.js
+        publicPath:'/app-path/' //this attr indicates, the path that should be used within your code when referencing the bundle
+    },
+    //This is the real magic of the webpack module loaders
+    module:{
+        loaders:[{ //
+            test:/\.js$/, //this is a regex expression saying target all files ending with .js files extension
+            loaders:['babel'], //A babel compiles for ES6 to native ES5. NOTE: this is using the babel-loader plugin
+            include:path.join(__dirname,'src')
+        },{
+          test:/\.jpg/, // This is regex expression saying target all files ending with .jpg files extension
+          loader:'file'  //NOTE: this is using the file-loader plugin
+        }]
+    }//end:module
+}//end:webpack-config
+
+```

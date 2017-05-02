@@ -5,6 +5,7 @@ import $ from 'jquery';
 import {Router, Route, hashHistory} from 'react-router'; 
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import configStyles from './styles/config-styles';
 //Custom Components
 import App from './App';
 import ACounter from './ACounter';
@@ -14,6 +15,9 @@ import Whoops404 from './Whoops404';
 import Loader from './Loader';
 //Styles
 import './styles/index.css';
+//Global Styles
+import {Style} from 'radium';
+import loaderStyles from './styles/loader-styles';
 
 //Router has a ppty called history to which we assign hashHistory, to keep track for URL's address history
 const MainApp = (props)=>{
@@ -30,7 +34,9 @@ const MainApp = (props)=>{
     );//end:return
 };//end:MainApp
 
-ReactDOM.render(<MainApp />,document.getElementById('root')); //ReactDOM
+ReactDOM.render(<MainApp>
+    <Style rules={loaderStyles}/> 
+</MainApp>,document.getElementById('root')); //ReactDOM
 
 //Using jQuery to trigger React Component
 
@@ -41,4 +47,7 @@ console.log('Selected loader div element is: ', loaderDiv[0]);
 //     ReactDOM.render(<Loader isLoading="true"/>,loaderDiv[0]); //ReactDOM
 // });
 //jQuery using Ecmascript 6 arrow function
-selectedRow.on('click',()=>ReactDOM.render(<Loader isLoading="true"/>,loaderDiv[0]));
+selectedRow.on('click',()=>ReactDOM.render(<Loader 
+isLoading="true">
+</Loader>
+,loaderDiv[0]));
