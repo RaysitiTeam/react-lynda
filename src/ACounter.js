@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
-import $ from 'jquery';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './styles/ACounter.css';
 import Loader from './Loader';

@@ -3,7 +3,10 @@
  ## Useful Links
 - [Schema Store for Web Development](http://schemastore.org/json/)
 - [React Icons Website](https://gorangajic.github.io/react-icons/fa.html)
-- [React Proptypes In Typeschecking](#https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
+- [React Proptypes In Typeschecking](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
+- [Mounting Lifecycle reference](https://goo.gl/f6rL3C)
+- [Random User Website](https://www.randomuser.me)
+- [Understanding ECMASCRIPT 6 arrow functions](https://www.nczonline.net/blog/2013/09/10/understanding-ecmascript-6-arrow-functions/)
  ## Table of Contents
 - [Intalling Web Pack](#installing-web-pack)
 - [Importing React Components](#importing-react-components)
@@ -12,7 +15,11 @@
 - [Three ways of Creating React Components](#three-ways-of-creating-react-components)
 - [Package Json for the project](#package-json-for-the-project)
 - [Using Default Props in React](#using-default-props-in-react)
-- [Using Proptypes A feature similar to TypeScript](#using-proptypes-a-feature-similar-to-type-script)
+- [Using Proptypes A feature similar to TypeScript](#using-proptypes-a-feature-similar-to-typescript)
+- [Using React Router](#using-react-router)
+- [React Forms](#react-forms)
+- [Using Refs with Forms](#using-refs-with-forms)
+- [Understanding the Component Lifecycle](#understanding-the-component-lifecycle)
 
 
  # Installing Web Pack
@@ -387,3 +394,368 @@ ACounter.propTypes = {
     goal:PropTypes.number
 };
 ```
+
+# Using React Router
+
+>NOTE: As of `react-router@4.1.1 and above`, the `hashHistory` component has been moved to it's own package.
+
+>`npm install --save react-router-dom`
+>import ReactRouter,{hashHistory} from 'react-router-dom';
+
+
+>NOTE: Use the `react-router@3.0.0` which has the `hashHistory` part of the module.
+
+
+```js
+{
+  "name": "react-basics",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.1",
+    "bootstrap": "^3.3.7",
+    "classnames": "^2.2.5",
+    "jquery": "^3.2.1",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-icons": "^2.2.3",
+    "react-router": "^3.0.0"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+```
+
+## Configuring the React Router
+
+Configuring the React Router, is very simple
+
+```js
+//React Libraries
+import React from 'react';
+//react-router@4.1.1 has some major changes, so using the react-router@3.0.0
+import {Router, Route, hashHistory} from 'react-router'; 
+import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+//Custom Components
+import App from './App';
+import ACounter from './ACounter';
+import ACList from './ACList';
+import ACRow from './ACRow';
+import Whoops404 from './Whoops404';
+//Styles
+import './styles/index.css';
+
+//Router has a ppty called history to which we assign hashHistory, to keep track for URL's address history
+const MainApp = (props)=>{
+    return(
+        <div>
+            <Router history={hashHistory}>
+                <Route path="/" component={App}/>            
+                <Route path="/form" component={App}/>            
+                <Route path="/count" component={ACounter}/>            
+                <Route path="/list" component={ACList}/>
+                <Route path="*" component={Whoops404}/>
+            </Router>
+        </div>
+    );//end:return
+};//end:MainApp
+
+ReactDOM.render(<MainApp />,document.getElementById('root')); //ReactDOM
+```
+
+## Using the same component and using props.location.pathname to change states
+
+You can even call the same component, over and over again, and inside that Component, you can configure nested components by making use of the `props.location.pathname` property.
+
+```js
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './styles/App.css';
+import Axios from 'axios';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import AddDayForm from './AddDayForm';
+
+class App extends Component {
+  state={
+    title:'',
+    message:''
+  };
+
+  getJson=()=>{
+    // Axios.get(`https://api.github.com/users/${this.state.userName}`)
+    Axios.get(`json/simple.json`)
+    .then(response => {
+    	//console.log('Returned response is: ', response);      
+      this.setState({title:response.data.title});
+      this.setState({message:response.data.message});
+    });
+  };//end:getJson
+  render() {
+    return (
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Welcome to React {this.state.title}</h2>
+        </div>
+        {(this.props.location.pathname === '/')?
+        <div><button className="btn btn-primary simple-button" onClick={this.getJson}>click Me !</button><p className="App-intro">To get started, edit <code>src/App.js</code> and save to reload.</p></div>
+        :(this.props.location.pathname === '/form')?<AddDayForm/>:null
+        }        
+      </div>
+    );//end:return
+  }//end:render
+}//end-class:App
+
+export default App;
+```
+
+## Using the Link component inbuilt of react-router
+
+`React Router` *(Atleast `react-router@3.0.0`)* ships with the inbuild `Link` component:
+
+```js
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import HomeIcon from 'react-icons/lib/fa/home';
+import AddDayIcon from 'react-icons/lib/fa/calendar-plus-o';
+import ListDayIcon from 'react-icons/lib/fa/table';
+
+const Menu = (props) =>{
+    return(
+        <nav className="navbar">
+            <Link to="/" activeClassName="selected">
+                <HomeIcon/> Home /
+            </Link>
+            <Link to="/form" activeClassName="selected">
+                <AddDayIcon/> Add /
+            </Link>
+            <Link to="/list" activeClassName="selected">
+                <ListDayIcon/> List /
+            </Link>
+        </nav>
+    );
+};//end:Menu
+
+export default Menu;
+```
+
+# React Forms
+
+## Assigning Default Values to Form elements
+
+This can be achieved by the following:
+
+1. Assigning Property validation using PropTypes
+
+```js
+AddDayForm.propTypes = {
+    resort: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+    powder:PropTypes.bool.isRequired,
+    backcountry:PropTypes.bool.isRequired
+}//end:propTypes
+```
+
+2. Assign defaultValues to Components
+
+```js
+AddDayForm.defaultProps = {
+    resort: 3,
+    date: '02/01/2017',
+    powder:false,
+    backcountry:false
+}//end:defaultProps
+```
+
+3. Use the keywords `defaultValues` or `defaultChecked` for different form input elements
+
+```js
+//AddDayForm - function component
+import React,{Component} from 'react';
+import PropTypes from 'prop-types';
+
+/*const AddDayForm = (props) =>{
+    return(
+        <div className="container">
+            <h1>This is a simple Form</h1>
+            <form className="form form-group">                
+                <input type="text" name="userName" id="userName" placeholder="Enter your name"/>
+            </form>
+        </div>
+    )
+};//end:AddDayForm*/
+
+class AddDayForm extends Component{
+    render(){
+        const {resort,date,powder,backcountry} = this.props;
+        return(
+        <div className="container">
+            <h1>This is a simple Form</h1>
+            <form className="form form-group">                
+                <p>
+                    <label htmlFor="userName">Enter Name</label>
+                    <input type="text" name="userName" id="userName" placeholder="Enter your name" required defaultValue = {resort}/>
+                </p>
+                <p>
+                    <label htmlFor="userDate">Enter Date</label>
+                    <input type="text" name="userDate" id="userDate" placeholder="Enter date" required defaultValue = {date}/>
+                </p>
+                <p><input type="checkbox" name="powder" id="powder" defaultChecked={powder}/> Powder</p>
+                <p><input type="checkbox" name="backcountry" id="backcountry" defaultChecked={backcountry}/>Backcountry</p>
+            </form>
+        </div>
+    )
+    };//end:render
+}//end:class-AddDayForm
+
+//Adding Type check and required ppty to Component's proptypes
+
+AddDayForm.propTypes = {
+    resort: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+    powder:PropTypes.bool.isRequired,
+    backcountry:PropTypes.bool.isRequired
+}//end:propTypes
+
+AddDayForm.defaultProps = {
+    resort: 3,
+    date: '02/01/2017',
+    powder:false,
+    backcountry:false
+}//end:defaultProps
+
+export default AddDayForm;
+```
+
+# Using Refs with Forms
+
+Refs can be used with both Class Components and Function Components for `one way data binding`
+
+## Using Refs with Class Components
+
+```js
+//AddDayForm - function component
+import React,{Component} from 'react';
+import PropTypes from 'prop-types';
+
+class AddDayForm extends Component{
+
+    //Whenever we invoke a function using this.submit or this.customMethod, we need to expose it/bind it
+    constructor(props){
+        super(props);
+        this.submit = this.submit.bind(this);
+    }//end:constructor
+    submit = (e)=>{
+        e.preventDefault();
+        console.log('Resort value is:', this.refs.resort.value);
+        console.log('Entered Date is:', this.refs.date.value);
+        console.log('is Powder checked?', this.refs.powder.checked);
+        console.log('is Backcountry checked?', this.refs.backcountry.checked);
+    };//end:submit
+
+    render(){
+        const {resort,date,powder,backcountry} = this.props;
+        return(
+        <div className="container">
+            <h1>This is a simple Form</h1>
+            <form className="form form-group" onSubmit={this.submit}>                
+                <p>
+                    <label htmlFor="userName">Enter Name</label>
+                    <input ref="resort" type="text" name="userName" id="userName" placeholder="Enter your name" required defaultValue = {resort}/>
+                </p>
+                <p>
+                    <label htmlFor="userDate">Enter Date</label>
+                    <input ref="date" type="text" name="userDate" id="userDate" placeholder="Enter date" required defaultValue = {date}/>
+                </p>
+                <p><input ref="powder" type="checkbox" name="powder" id="powder" defaultChecked={powder}/> Powder</p>
+                <p><input ref="backcountry" type="checkbox" name="backcountry" id="backcountry" defaultChecked={backcountry}/>Backcountry</p>
+                <p>
+                    <button className="btn btn-info" type="submit">Submit</button>
+                </p>
+            </form>
+        </div>
+    )
+    };//end:render
+}//end:class-AddDayForm
+
+//Adding Type check and required ppty to Component's proptypes
+
+AddDayForm.propTypes = {
+    resort: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+    powder:PropTypes.bool.isRequired,
+    backcountry:PropTypes.bool.isRequired
+}//end:propTypes
+
+AddDayForm.defaultProps = {
+    resort: 3,
+    date: '02/01/2017',
+    powder:false,
+    backcountry:false
+}//end:defaultProps
+
+export default AddDayForm;
+```
+
+## Using Refs with Functional Components vs Class Components
+
+There are two pirmary differences when using refs with `Class Components` & using refs with `Functional Components`:
+
+|Class Components|Functional Component|  
+|:--------------------------|------------------------------------:|
+|ref takes a string value|ref takes in a Javascript expression|
+|`ref="referenceValue"`|`ref ={input=>_referenceValue=input}`|
+|`this.refs.referenceValue.value`|`let _referenceValue;``_referenceValue.value`|
+
+
+# Understanding the Component Lifecycle
+
+Each component has several `"lifecycle methods"` that you can override to run code at particular times in the process. Methods prefixed with will are called right before something happens, and methods prefixed with did are called right after something happens.
+
+## Mounting
+These methods are called when an instance of a component is being created and inserted into the DOM:
+
+- constructor()
+- componentWillMount()
+- render()
+- componentDidMount()
+
+# Updating
+An update can be caused by changes to props or state. These methods are called when a component is being re-rendered:
+
+- componentWillReceiveProps()
+- shouldComponentUpdate()
+- componentWillUpdate()
+- render()
+- componentDidUpdate()
+
+## Unmounting
+This method is called when a component is being removed from the DOM:
+
+- componentWillUnmount()
+
+## Other APIs
+Each component also provides some other APIs:
+
+- setState()
+- forceUpdate()
+
+## Class Properties
+- defaultProps
+- displayName
+
+## Instance Properties
+- props
+- state
+
+
+

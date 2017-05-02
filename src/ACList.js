@@ -1,7 +1,11 @@
+//react libraries
 import React, {Component} from 'react';
 import Axios from 'axios';
+import ClassNames  from 'classnames';
+//custom libraries
 import ACRow from './ACRow';
-import ClassNames from 'classnames';
+import Menu from './Menu';
+//Styles
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class ACList extends Component{
@@ -11,8 +15,12 @@ class ACList extends Component{
 
     constructor(){
         super();
-        this.getHttpRequest();
+        
     }//end:constructor
+
+    componentDidMount  = () =>{
+        this.getHttpRequest();
+    }//end:will run after the render() 
 
     getHttpRequest = () =>{
         Axios.get(`json/resort.json`)
@@ -26,6 +34,8 @@ class ACList extends Component{
     render(){        
         let liTableClass = ClassNames({ 'container':true,'table':true,'table-inverse':true });
         return(
+            <div>
+            <Menu/>
             <table className={liTableClass}>
                 <thead>
                     <tr>
@@ -36,15 +46,16 @@ class ACList extends Component{
                     </tr>
                 </thead>
                 <tbody>                  
-                    {this.state.resortList.map((item,i)=><ACRow key={i}
+                    {this.state.resortList.length?this.state.resortList.map((item,i)=><ACRow key={i}
                                                             date={item.date}
                                                             resort = {item.resort}
                                                             powder = {item.powder}
                                                             backcountry = {item.backcountry}
                     />
-                    )}
+                    ):<ACRow/>}
                 </tbody>
             </table>
+            </div>
         );//end:return
     }//end:render
 }//end:class-ACList

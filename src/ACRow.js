@@ -15,4 +15,11 @@ const ACRow = ({date,resort,powder,backcountry}) =>{
     );
 };//end:ACRow
 
+ACRow.defaultProps = {
+    date:'01/01/2017',
+    resort:'Loading',
+    powder:false,
+    backcountry:false    
+};
+
 export default ACRow;
