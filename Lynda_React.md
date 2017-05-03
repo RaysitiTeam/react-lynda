@@ -7,6 +7,8 @@
 - [Mounting Lifecycle reference](https://goo.gl/f6rL3C)
 - [Random User Website](https://www.randomuser.me)
 - [Understanding ECMASCRIPT 6 arrow functions](https://www.nczonline.net/blog/2013/09/10/understanding-ecmascript-6-arrow-functions/)
+- [React Scaffolding application setup](https://github.com/coryhouse/react-slingshot)
+- [React Pluralsight github repo](https://github.com/coryhouse/pluralsight-redux-starter)
  ## Table of Contents
 - [Intalling Web Pack](#installing-web-pack)
 - [Importing React Components](#importing-react-components)
@@ -20,11 +22,15 @@
 - [React Forms](#react-forms)
 - [Using Refs with Forms](#using-refs-with-forms)
 - [Understanding the Component Lifecycle](#understanding-the-component-lifecycle)
-## React Inline Styling using Radium (Pluralsight)
+ ## React Inline Styling using Radium (Pluralsight)
 - [Introduction to radium](#introduction-to-radium)
 - [Radium Styling Video on Pluralsight](https://app.pluralsight.com/player?course=react-styling-components&author=jake-trent&name=react-styling-components-m3&clip=2&mode=live)
-## Using Webpack for CSS Styling
+ ## Using Webpack for CSS Styling
 - [Introduction to Webpack Asset building](#introduction-to-webpack-asset-building)
+ ## React and Redux
+ - [React Redux Versions](#react-redux-versions)
+ - [Hot Reloading](#hot-reloading)
+
 
 
  # Installing Web Pack
@@ -853,3 +859,22 @@ module.exports = {
 }//end:webpack-config
 
 ```
+
+# React Redux Versions
+
+The following are some of the versions and are available on github
+
+- [Pluralsight Redux Github link](https://github.com/coryhouse/pluralsight-redux-starter)
+
+- react:`^15.0.2`,
+- redux:`3.5.2`,
+- reactRouter:`2.4.0`,
+- webpack:`1.13`,
+- babel:`^6.x`,
+
+# Hot Reloading
+
+We will be using the library
+
+- babel-preset-react-hmre
+

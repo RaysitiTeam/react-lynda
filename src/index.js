@@ -40,7 +40,7 @@ ReactDOM.render(<MainApp>
 
 //Using jQuery to trigger React Component
 
-let selectedRow = $('#clickItem');
+let selectedRow = $('#reactLoader');
 let loaderDiv = $('#loaderDivArea');
 console.log('Selected loader div element is: ', loaderDiv[0]);
 // selectedRow.on('click',function(){
